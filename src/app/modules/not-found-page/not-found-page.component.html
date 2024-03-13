@@ -1,1 +1,24 @@
-<p>not-found-page works!</p>
+<main
+  class="flex justify-content-center align-items-center h-screen bg-primary-900"
+>
+  <div class="flex flex-column justify-content-center align-items-center">
+    <div class="text-white text-center my-3">
+      <h1 class="text-6xl">Opps!</h1>
+      <h2 class="text-4xl">Parece que algo salió mal</h2>
+    </div>
+    <img
+      ngSrc="assets/404.png"
+      alt="Imagen ruta no encontrada"
+      class="my-4"
+      height="260"
+      width="300"
+    />
+
+    <p-button
+      label="Volver a los sorteos"
+      [rounded]="true"
+      severity="warning"
+      [routerLink]="['/']"
+    ></p-button>
+  </div>
+</main>

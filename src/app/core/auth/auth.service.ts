@@ -29,7 +29,7 @@ export class AuthService {
   // private authApi = inject(AuthApiService);
 
   // variables
-  private authUser = signal<IUser | undefined>(undefined);
+  authUser = signal<IUser | undefined>(undefined);
 
   isAuthenticated(): Observable<boolean> {
     const token: string = localStorage.getItem('token') || '';

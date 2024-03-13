@@ -1,10 +1,12 @@
 import { Routes } from '@angular/router';
-import { authGuard } from "./core/guards/auth.guard";
-import { notAuthGuard } from "./core/guards/not-auth.guard";
+import { authGuard } from './core/guards/auth.guard';
+import { notAuthGuard } from './core/guards/not-auth.guard';
 
 export const routes: Routes = [
   {
     path: 'sorteos',
+    loadComponent: () =>
+      import('./modules/lottery/pages/layout/layout.component'),
     loadChildren: () => import('./modules/lottery/lottery.routes'),
   },
   {
@@ -14,18 +16,20 @@ export const routes: Routes = [
         path: 'login',
         loadComponent: () =>
           import('./modules/auth/page/login/login.component'),
-          canActivate:[notAuthGuard]
+        canActivate: [notAuthGuard],
       },
       {
         path: 'registro',
         loadComponent: () =>
           import('./modules/admin/pages/registry/registry.component'),
-          canActivate:[notAuthGuard]
+        canActivate: [notAuthGuard],
       },
       {
         path: 'dashboard',
+        loadComponent: () =>
+          import('./modules/admin/pages/dashboard/dashboard.component'),
         loadChildren: () => import('./modules/admin/admin.routes'),
-        canActivate:[authGuard]
+        canActivate: [authGuard],
       },
       {
         path: '',
