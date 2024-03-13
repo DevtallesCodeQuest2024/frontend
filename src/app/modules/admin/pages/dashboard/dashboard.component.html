@@ -1,0 +1,17 @@
+<div class="dashboard">
+  <app-sidebar />
+
+  <header class="dashboard__header">
+    <p-menubar [model]="menus()">
+      <ng-template pTemplate="start">
+        <div class="dashboard__header--img relative h-full w-full flex align-items-center">
+          <img ngSrc="assets/LOGOBLANCO.png" class="px-2" height="36" width="195" />
+        </div>
+      </ng-template>
+    </p-menubar>
+  </header>
+
+  <main class="dashboard__content">
+    <router-outlet />
+  </main>
+</div>

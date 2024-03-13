@@ -1,0 +1,22 @@
+::ng-deep p-button button {
+  display: block;
+  width: 100%;
+}
+
+::ng-deep p-badge span {
+  min-width: 1.5rem;
+}
+
+::ng-deep .p-card-subtitle {
+  margin-bottom: 0;
+}
+
+::ng-deep .p-card-content{
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+::ng-deep .p-card-footer {
+  padding-top: 0;
+}
+
