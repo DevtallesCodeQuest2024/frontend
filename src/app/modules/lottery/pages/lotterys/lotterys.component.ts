@@ -1,8 +1,9 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { LotteryCardComponent } from '@app/shared/components/lottery-card/lottery-card.component';
-import { Observable, of } from 'rxjs';
+import { ILottery } from "@app/core/models/loterry";
+import { LotteryService } from "@app/modules/lottery/services/lottery.service"
 
 @Component({
   selector: 'app-lotterys',
@@ -11,9 +12,13 @@ import { Observable, of } from 'rxjs';
   templateUrl: './lotterys.component.html',
   styleUrl: './lotterys.component.scss',
 })
-export default class LotterysComponen implements OnInit {
-  lotterys: Observable<number[]> = of([]);
-  ngOnInit(): void {
-    this.lotterys = of([1, 2, 3, 4, 5, 6, 7, 8]);
+export default class LotterysComponent {
+  lotteryService = inject(LotteryService);
+  lotterys = computed(() => this.lotteryService.lotterys())
+
+  constructor() {
+    this.lotteryService.getPublicLotterys().subscribe((lotterys) => {
+      this.lotteryService.lotterys.set(lotterys)
+    });
   }
 }

@@ -1,0 +1,38 @@
+<div class="container__form">
+  <div class="h-full flex justify-content-center align-items-center p-3">
+    <form
+      class="col sm:col-8 md:col-6 lg:col-5 xl:col-3 p-4 border-round bg-white shadow-1"
+    >
+      <div class="flex justify-content-center">
+        <img src="assets/ISO DUO.png" alt="logo" width="80" />
+      </div>
+      <h1 class="text-center mt-2">Registro</h1>
+
+      <div class="col-12 flex flex-column gap-2">
+        <label for="email">Correo electrónico</label>
+        <input
+          pInputText
+          id="email"
+          placeholder="Ingrese su correo"
+          [formControl]="emailControl"
+        />
+        @if (emailControl.invalid && emailControl.touched) {
+          <small class="text-red-700 font-bold">
+            {{errorMail}}
+          </small
+        >}
+      </div>
+
+      <div class="col-12 form__buttons">
+        <button
+        type="button"
+          pButton
+          pRipple
+          class="bg-primary-700 w-full"
+          label="Registrarse"
+          (click)="registry()"
+        ></button>
+      </div>
+    </form>
+  </div>
+</div>

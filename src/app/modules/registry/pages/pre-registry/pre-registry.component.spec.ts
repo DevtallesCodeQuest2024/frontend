@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import LayoutComponent from './layout.component';
+import { PreRegistryComponent } from './pre-registry.component';
 
-describe('LayoutComponent', () => {
-  let component: LayoutComponent;
-  let fixture: ComponentFixture<LayoutComponent>;
+describe('PreRegistryComponent', () => {
+  let component: PreRegistryComponent;
+  let fixture: ComponentFixture<PreRegistryComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LayoutComponent]
+      imports: [PreRegistryComponent]
     })
     .compileComponents();
-
-    fixture = TestBed.createComponent(LayoutComponent);
+    
+    fixture = TestBed.createComponent(PreRegistryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
