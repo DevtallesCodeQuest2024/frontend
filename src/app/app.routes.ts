@@ -3,7 +3,7 @@ import { authGuard } from './core/guards/auth.guard';
 import { notAuthGuard } from './core/guards/not-auth.guard';
 import { LotteryService } from '@app/modules/lottery/services/lottery.service';
 import { RegistryService } from "@app/modules/registry/services/registry.service";
-import {LandingPageComponent} from "@app/shared/pages/landing-page/landing-page.component";
+import { LandingPageComponent } from "@app/shared/pages/landing-page/landing-page.component";
 
 export const routes: Routes = [
   {
@@ -44,7 +44,7 @@ export const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'sorteos',
+    redirectTo: 'inicio',
     pathMatch: 'full',
   },
   {

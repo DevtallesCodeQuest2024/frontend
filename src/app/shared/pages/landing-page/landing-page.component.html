@@ -7,14 +7,25 @@
         <p class="mt-0 mb-4 text-700 line-height-4">Si eres un usuario del servidor de devtalles en Discord, entonces puedes participar y tener la posibilidad de
           <span class="text-primary font-bold font-italic">ganar</span> increíbles premios. Los sorteos son gestionados por el equipo de Devtalles.</p>
 
-        <p-button
-          pButton
-          label="&nbsp; Buscar sorteos"
-          type="button"
-          class="mr-3 p-button-raised"
-          icon="pi pi-check"
-          [routerLink]="'/sorteos'"
-        ></p-button>
+        <div class="container__buttons col-12 flex flex-wrap gap-3">
+
+          <button
+            pButton
+            pRipple
+            class="p-3 p-button-raised"
+            label="Participar"
+            [routerLink]="['/sorteos']"
+          ></button>
+
+          <button
+            pButton
+            pRipple
+            class="p-3 p-button-success p-button-raised"
+            label="Crear sorteo"
+            [routerLink]="['/admin']"
+          ></button>
+        </div>
+
       </article>
     </div>
     <div class="container-image col-12 md:col-6 overflow-hidden">
