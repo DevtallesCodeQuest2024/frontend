@@ -8,3 +8,20 @@
 ::ng-deep p-password>* input {
   width: 100%;
 }
+
+.form__buttons {
+  display: inline-flex;
+  display: flex;
+  gap: .5rem;
+
+  button {
+    background-color:var(--primary-700); ;
+    flex-grow: 1;
+  }
+
+  .form__buttons--outlined {
+    background-color: transparent;
+    color: var(--primary-700);
+    border: 1px solid;
+  }
+}

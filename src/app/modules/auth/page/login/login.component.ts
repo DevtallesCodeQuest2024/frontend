@@ -17,8 +17,11 @@ import { ButtonModule } from 'primeng/button';
 import { PasswordModule } from 'primeng/password';
 import { DividerModule } from 'primeng/divider';
 import { ToastModule } from 'primeng/toast';
+import { RippleModule } from 'primeng/ripple';
+
 // services prime
 import { MessageService } from 'primeng/api';
+import { RouterLink } from "@angular/router";
 
 type controlType = 'email' | 'password';
 
@@ -28,13 +31,13 @@ const primeComponents = [
   PasswordModule,
   DividerModule,
   ToastModule,
+  RippleModule
 ];
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  providers: [MessageService],
-  imports: [ReactiveFormsModule, ...primeComponents],
+  imports: [ReactiveFormsModule, RouterLink, ...primeComponents],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

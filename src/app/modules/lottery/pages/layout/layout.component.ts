@@ -12,6 +12,6 @@ import { HeaderComponent } from '@app/shared/components/header/header.component'
       <router-outlet />
     </main>
   `,
-  styles: ``,
+  styleUrl: './layout.component.scss',
 })
 export default class LayoutComponent {}

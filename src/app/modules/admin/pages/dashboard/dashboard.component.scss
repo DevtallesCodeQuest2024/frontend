@@ -8,50 +8,11 @@
   min-height: calc(100dvh - 62px);
 }
 
-:host ::ng-deep .p-menubar {
-  position: relative;
-  height: 3.5rem;
-  background-color: #6366F1;
-  margin: .2rem;
-}
-
-:host ::ng-deep .p-menubar .p-menubar-button {
-  position: absolute;
-  right: 0;
-  top: 100%;
-  transform: translateX(-50%) translateY(-135%);
-  color: #6b7280;
-  background: #f3f4f6;
-}
-
 /* modifcar tamaño Mayor a 960px */
 @media screen and (min-width: 961px) {
 
   .dashboard__content,
   .dashboard__header {
     margin-left: 321px;
-  }
-
-  .dashboard__header ::ng-deep .dashboard__header--img {
-    display: none !important;
-  }
-
-  :host ::ng-deep .p-menubar-root-list>li:last-child .p-submenu-list {
-    right: 0;
-  }
-
-  :host ::ng-deep .p-menubar .p-menubar-root-list {
-    position: absolute;
-    right: 0;
-    top: 100%;
-    transform: translateX(-3%) translateY(-119%);
-  }
-
-  ::ng-deep .p-menuitem-content {
-    background: white;
-  }
-
-  ::ng-deep .p-menuitem-content:hover {
-    background: #f3f4f6;
   }
 }

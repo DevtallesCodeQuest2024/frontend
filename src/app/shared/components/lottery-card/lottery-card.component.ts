@@ -1,18 +1,67 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  booleanAttribute,
+  inject,
+  signal,
+} from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { BadgeModule } from 'primeng/badge';
-import { RouterLink } from '@angular/router';
+import { MenuModule } from 'primeng/menu';
+import { MenuItem } from 'primeng/api';
+
+import { ILottery } from '@app/core/models/loterry';
+import { LotteryService } from '@app/modules/admin/services/lottery.service';
 
 @Component({
   selector: 'app-lottery-card',
   standalone: true,
-  imports: [CardModule, ButtonModule, BadgeModule, RouterLink],
+  imports: [CardModule, ButtonModule, BadgeModule, RouterLink, MenuModule],
   templateUrl: './lottery-card.component.html',
   styleUrl: './lottery-card.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LotteryCardComponent {
-  @Input({ required: true }) num!: number;
+  // Service
+  private lotteryService = inject(LotteryService, { optional: true });
+  private router = inject(Router);
+
+  // Inputs
+  @Input({ required: true }) lottery!: ILottery;
+  @Input({ transform: booleanAttribute }) isAdmin: boolean = false;
+
+  // Menu
+  public menus = signal<MenuItem[]>([
+    {
+      label: 'Opciones',
+      items: [
+        {
+          label: 'Actualizar',
+          icon: 'pi pi-refresh',
+          command: () => {
+            this.goRuteUpdate();
+          },
+        },
+        {
+          label: 'Eliminar',
+          icon: 'pi pi-times',
+          command: () => {
+            this.delete();
+          },
+        },
+      ],
+    },
+  ]);
+
+  goRuteUpdate() {
+    this.router.navigate(['admin/dashboard/sorteo', this.lottery.id, 'editar']);
+  }
+
+  delete() {
+    this.lotteryService!.deleteLottery(this.lottery).subscribe();
+  }
 }

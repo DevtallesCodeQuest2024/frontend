@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 import { ILogin } from '@app/core/models/auth';
 import { IUser } from '@app/core/models/user';
 import { AuthApiService } from '@app/core/api/auth-api.service';
+import { RegistryApiService } from "../api/registry-api.service";
 
 const user: IUser = {
   name: 'gregory arcentales',
@@ -28,8 +29,8 @@ export class AuthService {
   private router = inject(Router);
   // private authApi = inject(AuthApiService);
 
-  // variables
-  authUser = signal<IUser | undefined>(undefined);
+  // User Authenticated
+  public authUser = signal<IUser | undefined>(undefined);
 
   isAuthenticated(): Observable<boolean> {
     const token: string = localStorage.getItem('token') || '';
@@ -41,7 +42,6 @@ export class AuthService {
     return this.loginRenew().pipe(
       map(() => true),
       catchError((err) => {
-        console.error(err);
         this.logout();
         return of(false);
       })
@@ -55,7 +55,6 @@ export class AuthService {
         this.authUser.set(user);
         localStorage.setItem('token', 'abc');
       })
-      // switchMap(() => throwError(() => 'EEEEERRROORRRR'))
     );
   }
 
