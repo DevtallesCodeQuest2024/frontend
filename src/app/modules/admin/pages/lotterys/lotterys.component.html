@@ -1,1 +1,9 @@
-<p>lotterys works!</p>
+<div class="lotterys__list">
+  <section class="p-2 grid">
+    @for (lottery of lotterys(); track $index) {
+    <article class="col-12 sm:col-6 lg:col-4 xl:col-3">
+      <app-lottery-card [lottery]="lottery" isAdmin></app-lottery-card>
+    </article>
+    }
+  </section>
+</div>

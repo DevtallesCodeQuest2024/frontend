@@ -6,7 +6,6 @@ import {
 } from '@angular/core';
 
 import { SidebarModule } from 'primeng/sidebar';
-import { PrimeNGConfig } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { AvatarModule } from 'primeng/avatar';
 import { RippleModule } from 'primeng/ripple';
@@ -33,12 +32,9 @@ import { AuthService } from '@app/core/auth/auth.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarComponent {
-  private primengConfig = inject(PrimeNGConfig);
   private authService = inject(AuthService);
 
   public nameUser = computed(() => this.authService.authUser()?.name);
 
-  constructor() {
-    this.primengConfig.ripple = true;
-  }
+  constructor() {}
 }

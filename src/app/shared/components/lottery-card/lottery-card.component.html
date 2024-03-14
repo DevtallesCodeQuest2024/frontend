@@ -1,12 +1,49 @@
-<div class="card flex justify-content-center shadow-2">
-  <p-card header="Sorteo {{num}}" subheader="Devtalles">
+<div class="card shadow-2">
+  <p-card header="{{ lottery.name }}" subheader="{{ lottery.description }}">
     <ng-template pTemplate="header">
-      <img alt="Card" src="https://primefaces.org/cdn/primeng/images/usercard.png" />
+      <!-- <img
+        alt="Card"
+        src="https://primefaces.org/cdn/primeng/images/usercard.png"
+      /> -->
     </ng-template>
-    <p-badge value="{{num}}" severity="warning"></p-badge> Participantes
-    <ng-template pTemplate="footer" class="w-full" style="padding-top: 0;">
-      <p-button label="Detalle" [outlined]="true" [routerLink]="['./detalle', num]"></p-button>
-      <p-button label="Participar" icon="pi pi-bookmark-fill" class="block w-full mt-1"></p-button>
+    <div class="flex justify-content-between align-items-center">
+      <div class="flex align-items-center">
+        <p-badge
+          value="{{ lottery.participants }}"
+          severity="warning"
+        ></p-badge>
+        <span class="ml-1">Participantes</span>
+      </div>
+      @if (isAdmin) {
+      <div>
+        <p-menu #menu [model]="menus()" [popup]="true"></p-menu>
+        <button
+          pButton
+          type="button"
+          (click)="menu.toggle($event)"
+          icon="pi pi-bars"
+          class="bg-primary-900 border-circle"
+        ></button>
+      </div>
+      }
+    </div>
+    <ng-template pTemplate="footer" class="w-full" style="padding-top: 0">
+      <p-button
+        label="Detalle"
+        [outlined]="true"
+        [routerLink]="[
+          isAdmin ? '/admin/dashboard/sorteo' : './detalle',
+          lottery.id
+        ]"
+      ></p-button>
+      @if (!isAdmin) {
+      <p-button
+        label="Participar"
+        icon="pi pi-bookmark-fill"
+        class="btn--participar"
+        severity="warning"
+      ></p-button>
+      }
     </ng-template>
   </p-card>
 </div>

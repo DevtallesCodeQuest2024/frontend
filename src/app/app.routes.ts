@@ -1,33 +1,33 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth.guard';
 import { notAuthGuard } from './core/guards/not-auth.guard';
+import { LotteryService } from '@app/modules/lottery/services/lottery.service';
+import { RegistryService } from "@app/modules/registry/services/registry.service";
 
 export const routes: Routes = [
   {
     path: 'sorteos',
-    loadComponent: () =>
-      import('./modules/lottery/pages/layout/layout.component'),
+    loadComponent: () => import('./modules/lottery/pages/layout/layout.component'),
     loadChildren: () => import('./modules/lottery/lottery.routes'),
+    providers: [LotteryService],
   },
   {
     path: 'admin',
     children: [
       {
         path: 'login',
-        loadComponent: () =>
-          import('./modules/auth/page/login/login.component'),
+        loadComponent: () => import('./modules/auth/page/login/login.component'),
         canActivate: [notAuthGuard],
       },
       {
         path: 'registro',
-        loadComponent: () =>
-          import('./modules/admin/pages/registry/registry.component'),
+        loadChildren: () => import('./modules/registry/registry.routes'),
         canActivate: [notAuthGuard],
+        providers: [RegistryService],
       },
       {
         path: 'dashboard',
-        loadComponent: () =>
-          import('./modules/admin/pages/dashboard/dashboard.component'),
+        loadComponent: () => import('./modules/admin/pages/dashboard/dashboard.component'),
         loadChildren: () => import('./modules/admin/admin.routes'),
         canActivate: [authGuard],
       },
