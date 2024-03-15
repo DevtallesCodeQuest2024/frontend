@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  url: "http://localhost:4006/api/v1",
+  url: "https://sorteos-devtalles-06ee9219895b.herokuapp.com/api/v1",
 };
