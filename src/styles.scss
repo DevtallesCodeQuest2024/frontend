@@ -13,6 +13,20 @@ body {
   line-height: 1.5;
   min-height: calc(100dvh - .2rem);
   overflow-x: hidden;
+  cursor: url('assets/pointer.png'), auto;
+}
+
+//custom cursor
+label {
+  cursor: url('assets/pointer.png'), auto;
+}
+
+button:hover, div.col-12.form_buttons:hover {
+  cursor: url('assets/click.png'), pointer;
+}
+
+button:active {
+  cursor: url('assets/click2.png'), pointer;
 }
 
 p,
@@ -49,8 +63,33 @@ p-password.ng-invalid.ng-touched>.p-password>.p-inputtext {
   border-left: 3px solid #b32b23 !important;
 }
 
+
+
 /***** End Section Inputs *****/
 
+/***** Start Brand Colors *****/
+
+// Define CSS variables
+:root {
+  --primary-color: #26184a;
+}
+/***** End Brand Colors *****/
+
+
+/***** Start Mobile Viewport *****/
+@media (max-width: 768px) {
+  .hide-on-mobile {
+    display: none !important;
+  }
+}
+/***** End Mobile Viewport *****/
+
+
+/***** Start debugging classes *****/
+.debug {
+  border: 2px solid red;
+}
+/***** End debugging classes *****/
 
 
 

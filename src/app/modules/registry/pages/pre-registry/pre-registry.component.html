@@ -1,7 +1,11 @@
 <div class="container__form">
-  <div class="h-full flex justify-content-center align-items-center p-3">
+  <div class="h-full flex flex-column justify-content-start align-items-center p-3 py-8 bg-primary-700">
+    <div class="hide-on-mobile flex justify-content-center align-items-center">
+      <img class="pt-8" src="assets/hi.png">
+      <img src="assets/wink.png">
+    </div>
     <form
-      class="col sm:col-8 md:col-6 lg:col-5 xl:col-3 p-4 border-round bg-white shadow-1"
+    class="col sm:col-8 md:col-6 lg:col-5 xl:col-3 p-4 border-round bg-white shadow-1"
     >
       <div class="flex justify-content-center">
         <img src="assets/ISO DUO.png" alt="logo" width="80" />
@@ -28,9 +32,16 @@
         type="button"
           pButton
           pRipple
-          class="bg-primary-700 w-full"
           label="Registrarse"
           (click)="registry()"
+        ></button>
+        <button
+        type="button"
+          pButton
+          pRipple
+          class="form__buttons--outlined"
+          label="Iniciar Sesión"
+          [routerLink]="['/admin/login']"
         ></button>
       </div>
     </form>
