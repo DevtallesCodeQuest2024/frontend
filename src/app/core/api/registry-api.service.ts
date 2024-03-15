@@ -17,7 +17,21 @@ export class RegistryApiService {
     return this.http.post<IResponse>(`${this.url}/auth`, { email });
   }
 
-  registry(data: IRegistry): Observable<IResponse<IUser>> {
-    return this.http.post<IResponse<IUser>>(`${this.url}/users`, data);
+  verifyToken(token: string): Observable<IResponse> {
+
+    const headers = {
+      'Authorization': `Bearer ${token}`,
+    };
+
+    return this.http.get<IResponse>(`${this.url}/auth`, {headers});
+  }
+
+  registry(data: {password: string}, token: string): Observable<IResponse<IUser>> {
+
+    const headers = {
+      'Authorization': `Bearer ${token}`,
+    };
+
+    return this.http.post<IResponse<IUser>>(`${this.url}/users`, data, {headers});
   }
 }

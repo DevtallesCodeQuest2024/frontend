@@ -1,4 +1,4 @@
 export interface IRegistry {
-  name:       string;
+  email:       string;
   password:   string;
 }

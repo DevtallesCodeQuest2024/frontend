@@ -1,0 +1,18 @@
+.container {
+  height: 100vh;
+}
+
+.container-image {
+  height: 100dvh;
+  width: 50%;
+  background-image: url("/assets/fly.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+@media (max-width: 600px) {
+  .container-image {
+    width: 100%;
+  }
+}
