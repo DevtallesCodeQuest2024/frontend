@@ -6,7 +6,7 @@ export default [
     loadComponent: () => import('./pages/pre-registry/pre-registry.component'),
   },
   {
-    path: ':id',
-    loadComponent: () => import('./pages/registry/registry.component'),
+    path: 'verificar',
+    loadComponent: () => import('./pages/verify/verify.component'),
   },
 ] satisfies Route[];

@@ -12,6 +12,7 @@
       </div>
       <h1 class="text-center mt-2">Registro</h1>
 
+      @if (!wasSubmittedEmail) {
       <div class="col-12 flex flex-column gap-2">
         <label for="email">Correo electrónico</label>
         <input
@@ -30,7 +31,11 @@
           pButton
           pRipple
           label="Registrarse"
-          (click)="registry()"
+          (click)="preRegistry()"
+          [disabled]="this.isButtonDisabled"
+          [icon]="
+            isButtonDisabled ? 'pi pi-spin pi-spinner' : 'pi pi-check-circle'
+          "
         ></button>
         <button
           type="button"
@@ -41,6 +46,19 @@
           [routerLink]="['/admin/login']"
         ></button>
       </div>
+      } @if (wasSubmittedEmail) {
+      <div class="col-12 flex flex-column gap-3">
+        <div class="flex justify-content-center mb-1">
+          <img src="assets/wink.png" alt="logo" width="80" />
+        </div>
+        <small class="text-green-700 font-light">
+          Se envió un correo a
+          <span class="font-semibold"> {{ emailControl.value }} </span>con un
+          enlace para completar el registro. Por favor, revisa tu bandeja de
+          entrada.
+        </small>
+      </div>
+      }
     </form>
   </div>
 </div>
