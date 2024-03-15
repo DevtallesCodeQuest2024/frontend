@@ -10,7 +10,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
       messageService.add({
         key: 'toast',
         severity: 'error',
-        summary: 'Listo!',
+        summary: 'Lo sentimos!',
         detail: error.message,
       });
 

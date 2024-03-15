@@ -34,7 +34,12 @@ import { AuthService } from '@app/core/auth/auth.service';
 export class SidebarComponent {
   private authService = inject(AuthService);
 
-  public nameUser = computed(() => this.authService.authUser()?.name);
+  public nameUser = computed<string>(
+    () =>
+      `${this.authService.authUser()?.firstName} ${
+        this.authService.authUser()?.lastName
+      }`
+  );
 
   constructor() {}
 }
