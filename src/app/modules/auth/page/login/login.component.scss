@@ -1,12 +1,19 @@
 .container__form {
   height: 100dvh;
   max-height: 100dvh;
-  background-color: #e3e3e3;
 }
 
 ::ng-deep p-password>*,
 ::ng-deep p-password>* input {
   width: 100%;
+}
+
+::ng-deep p-password>* svg {
+  cursor: url('/assets/click.png'), auto !important;
+}
+
+::ng-deep p-password>* svg:active {
+  cursor: url('/assets/click2.png'), auto !important;
 }
 
 .form__buttons {
@@ -16,6 +23,7 @@
 
   button {
     background-color:var(--primary-700); ;
+    // take all available space
     flex-grow: 1;
   }
 
@@ -24,4 +32,5 @@
     color: var(--primary-700);
     border: 1px solid;
   }
+
 }
