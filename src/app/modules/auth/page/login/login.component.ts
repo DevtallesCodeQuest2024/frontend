@@ -20,7 +20,6 @@ import { ToastModule } from 'primeng/toast';
 import { RippleModule } from 'primeng/ripple';
 
 // services prime
-import { MessageService } from 'primeng/api';
 import { RouterLink } from "@angular/router";
 
 type controlType = 'email' | 'password';
@@ -46,7 +45,6 @@ export default class LoginComponent {
   // Services
   private authService = inject(AuthService);
   private nnfb = inject(NonNullableFormBuilder);
-  private messageService = inject(MessageService);
 
   loginForm = this.nnfb.group({
     email: this.nnfb.control<string>('', [Validators.required]),
@@ -61,24 +59,7 @@ export default class LoginComponent {
   }
 
   login() {
-    console.log(this.loginForm.value);
-
     if (this.loginForm.invalid) return this.loginForm.markAllAsTouched();
-
-    if (
-      this.loginForm.value.email !== 'gregoarcenta@gmail.com' ||
-      this.loginForm.value.password !== '12345'
-    ) {
-      console.log('invalid');
-
-      this.messageService.add({
-        key: 'toast',
-        severity: 'error',
-        summary: 'Lo sentimos!',
-        detail: 'Correo o contraseña incorrectos',
-      });
-      return;
-    }
 
     this.authService.login(this.loginForm.value as ILogin).subscribe();
   }

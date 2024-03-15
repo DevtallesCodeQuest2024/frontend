@@ -1,2 +1,6 @@
 <p-toast key="toast" position="bottom-center" [life]="4000"></p-toast>
-<router-outlet/>
+
+@if (loaderService.isActive()) {
+  <app-loader />
+}
+<router-outlet />

@@ -16,7 +16,7 @@ import {MessageService} from "primeng/api";
 @Component({
   selector: 'app-pre-registry',
   standalone: true,
-  imports: [ReactiveFormsModule, InputTextModule, ButtonModule, RippleModule],
+  imports: [ReactiveFormsModule, InputTextModule, RouterLink, ButtonModule, RippleModule],
   templateUrl: './pre-registry.component.html',
   styleUrl: './pre-registry.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
