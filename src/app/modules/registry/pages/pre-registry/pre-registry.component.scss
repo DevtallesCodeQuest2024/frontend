@@ -3,3 +3,22 @@
   max-height: 100dvh;
   background-color: #e3e3e3;
 }
+
+.form__buttons {
+  display: inline-flex;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+
+  button {
+    background-color:var(--primary-700); ;
+    flex-grow: 1;
+  }
+
+  .form__buttons--outlined {
+    background-color: transparent;
+    color: var(--primary-700);
+    border: 1px solid;
+  }
+
+}

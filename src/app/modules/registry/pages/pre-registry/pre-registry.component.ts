@@ -11,11 +11,12 @@ import { RegistryService } from '@app/modules/registry/services/registry.service
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-pre-registry',
   standalone: true,
-  imports: [ReactiveFormsModule, InputTextModule, ButtonModule, RippleModule],
+  imports: [ReactiveFormsModule, InputTextModule, RouterLink, ButtonModule, RippleModule],
   templateUrl: './pre-registry.component.html',
   styleUrl: './pre-registry.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
