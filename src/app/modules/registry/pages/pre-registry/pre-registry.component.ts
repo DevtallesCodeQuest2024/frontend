@@ -28,7 +28,7 @@ export default class PreRegistryComponent {
   // Variables
   emailControl = this.nnfb.control<string>('', [
     Validators.required,
-    Validators.pattern(/^[^@]+@devtalles\.com$/),
+    Validators.pattern(/^[^@]+@gmail\.com$/),
   ]);
 
   get errorMail(): string {
@@ -37,7 +37,7 @@ export default class PreRegistryComponent {
     }
 
     if (this.emailControl.hasError('pattern')) {
-      return 'El correo electrónico debe contener el dominio "@devtalles.com"';
+      return 'El correo electrónico debe contener el dominio "@gmail.com"';
     }
 
     return '';
