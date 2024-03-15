@@ -1,12 +1,12 @@
-<div class="container__form">
-  <div class="h-full flex flex-column justify-content-start align-items-center p-3 py-8 bg-primary-700">
+<div
+  class="container__form h-full flex flex-column justify-content-center align-items-center p-3 bg-primary-700"
+>
+  <div>
     <div class="hide-on-mobile flex justify-content-center align-items-center">
-      <img class="pt-8" src="assets/hi.png">
-      <img src="assets/wink.png">
+      <img class="pt-8" src="assets/hi.png" />
+      <img src="assets/wink.png" />
     </div>
-    <form
-    class="col sm:col-8 md:col-6 lg:col-5 xl:col-3 p-4 border-round bg-white shadow-1"
-    >
+    <form class="p-4 border-round bg-white shadow-1">
       <div class="flex justify-content-center">
         <img src="assets/ISO DUO.png" alt="logo" width="80" />
       </div>
@@ -21,22 +21,19 @@
           [formControl]="emailControl"
         />
         @if (emailControl.invalid && emailControl.touched) {
-          <small class="text-red-700 font-bold">
-            {{errorMail}}
-          </small
-        >}
+        <small class="text-red-700 font-bold"> {{ errorMail }} </small>}
       </div>
 
       <div class="col-12 form__buttons">
         <button
-        type="button"
+          type="button"
           pButton
           pRipple
           label="Registrarse"
           (click)="registry()"
         ></button>
         <button
-        type="button"
+          type="button"
           pButton
           pRipple
           class="form__buttons--outlined"
