@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, signal} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
 import {
   NonNullableFormBuilder,
   ReactiveFormsModule,
@@ -53,7 +53,7 @@ export default class PreRegistryComponent {
     return '';
   }
 
-  registry() {
+  preRegistry() {
     this.isButtonDisabled = true;
 
     if (this.emailControl.invalid) {
@@ -72,20 +72,15 @@ export default class PreRegistryComponent {
           this.messageService.add({
             key: 'toast',
             severity: 'success',
-            summary: 'Listo!',
-            detail: response.message,
+            summary: 'Pre-registro listo!',
+            detail: "Revisa tu correo electrónico para continuar con el registro. Puede cerrar esta ventana.",
           });
 
         },
         error: (error) => {
-          this.messageService.add({
-            key: 'toast',
-            severity: 'error',
-            summary: 'Error!',
-            detail: error,
-          });
           this.isButtonDisabled = false;
           this.cdr.markForCheck();
+          return error;
         },
       }
     );
