@@ -9,12 +9,7 @@ import { AuthApiService } from '@app/core/api/auth-api.service';
 // interfaces
 import { ILogin } from '@app/core/models/auth';
 import { IUser } from '@app/core/models/user';
-
-// const user: IUser = {
-//   lastName: 'gregory arcentales',
-//   email: 'gregoarcenta@gmail.com',
-
-// };
+import { IResponse } from "../models/apiResponse";
 
 @Injectable({
   providedIn: 'root',
@@ -44,12 +39,11 @@ export class AuthService {
     );
   }
 
-  private loginRenew(): Observable<any> {
-    // return this.authApi.renew().pipe()
-    return of({}).pipe(
-      tap((user) => {
-        this.authUser.set(user as any);
-        localStorage.setItem('token', 'abc');
+  private loginRenew(): Observable<IResponse<IUser>> {
+    return this.authApi.renew().pipe(
+      tap(({data, token}) => {
+        this.authUser.set(data);
+        localStorage.setItem('token', token!);
       })
     );
   }
