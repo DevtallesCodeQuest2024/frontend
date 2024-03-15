@@ -11,7 +11,6 @@ import { LotteryService } from '@app/modules/admin/services/lottery.service';
   selector: 'app-lotterys',
   standalone: true,
   imports: [LotteryCardComponent],
-  // providers: [LotteryService],
   templateUrl: './lotterys.component.html',
   styleUrl: './lotterys.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

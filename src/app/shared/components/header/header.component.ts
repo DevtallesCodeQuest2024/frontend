@@ -42,6 +42,13 @@ export class HeaderComponent {
 
   @Input({ transform: booleanAttribute }) isAdmin: boolean = false;
 
+  private userName = computed<string>(
+    () =>
+      `${this.authService.authUser()?.firstName} ${
+        this.authService.authUser()?.lastName
+      }`
+  );
+
   private items = signal<MenuItem[]>([
     {
       label: 'Sorteos',
@@ -65,7 +72,7 @@ export class HeaderComponent {
       ],
     },
     {
-      label: this.authService.authUser()?.name,
+      label: this.userName(),
       icon: 'pi pi-fw pi-user',
       items: [
         {

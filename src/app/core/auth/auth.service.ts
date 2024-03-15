@@ -1,33 +1,29 @@
 import { Injectable, inject, signal } from '@angular/core';
-import {
-  Observable,
-  catchError,
-  map,
-  of,
-  switchMap,
-  tap,
-  throwError,
-} from 'rxjs';
+import { EMPTY, Observable, catchError, map, of, switchMap, tap } from 'rxjs';
 import { Router } from '@angular/router';
+
+// services
+import { MessageService } from 'primeng/api';
+import { AuthApiService } from '@app/core/api/auth-api.service';
 
 // interfaces
 import { ILogin } from '@app/core/models/auth';
 import { IUser } from '@app/core/models/user';
-import { AuthApiService } from '@app/core/api/auth-api.service';
-import { RegistryApiService } from "../api/registry-api.service";
 
-const user: IUser = {
-  name: 'gregory arcentales',
-  email: 'gregoarcenta@gmail.com',
-};
+// const user: IUser = {
+//   lastName: 'gregory arcentales',
+//   email: 'gregoarcenta@gmail.com',
+
+// };
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   // services
+  private messageService = inject(MessageService);
   private router = inject(Router);
-  // private authApi = inject(AuthApiService);
+  private authApi = inject(AuthApiService);
 
   // User Authenticated
   public authUser = signal<IUser | undefined>(undefined);
@@ -48,24 +44,31 @@ export class AuthService {
     );
   }
 
-  private loginRenew(): Observable<IUser> {
+  private loginRenew(): Observable<any> {
     // return this.authApi.renew().pipe()
-    return of(user).pipe(
+    return of({}).pipe(
       tap((user) => {
-        this.authUser.set(user);
+        this.authUser.set(user as any);
         localStorage.setItem('token', 'abc');
       })
     );
   }
 
-  login(data: ILogin): Observable<IUser> {
-    // return this.authApi.login().pipe()
-    return of(user).pipe(
-      tap((data) => {
+  login(data: ILogin): Observable<void> {
+    return this.authApi.login(data).pipe(
+      tap(({ data, token }) => {
         this.authUser.set(data);
-        localStorage.setItem('token', 'abc');
+        localStorage.setItem('token', token!);
         this.router.navigateByUrl('/admin');
-      })
+      }),
+      tap(({ data }) => {
+        this.messageService.add({
+          key: 'toast',
+          severity: 'success',
+          summary: `BIENVENIDO ${data?.firstName} ${data?.lastName}`,
+        });
+      }),
+      switchMap(() => EMPTY)
     );
   }
 

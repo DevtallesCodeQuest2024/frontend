@@ -12,12 +12,13 @@ export class RegistryService {
   preRegistry(email: string): Observable<void> {
     return this.registryApiService.preRegistry(email).pipe(
       tap((response) => {
-        /* this.messageService.add({
+        this.messageService.add({
           key: 'toast',
           severity: 'success',
           summary: 'Listo!',
+          sticky: true,
           detail: response.message,
-        }); */
+        });
       }),
       switchMap(() => EMPTY)
     );

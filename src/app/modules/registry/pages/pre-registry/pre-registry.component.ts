@@ -46,6 +46,9 @@ export default class PreRegistryComponent {
   registry() {
     if (this.emailControl.invalid) return this.emailControl.markAllAsTouched();
 
-    this.registryService.preRegistry(this.emailControl.value).subscribe();
+    this.registryService.preRegistry(this.emailControl.value).subscribe({
+      complete: () => this.emailControl.reset(),
+      error: () => this.emailControl.reset(),
+    });
   }
 }
