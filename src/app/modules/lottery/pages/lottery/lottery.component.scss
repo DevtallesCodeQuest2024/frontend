@@ -1,0 +1,63 @@
+::ng-deep .p-button {
+  width: 100%;
+}
+
+.box__gift {
+  padding: 3rem;
+  display: grid;
+  place-items: center;
+}
+
+.gift {
+  padding: 1.5rem;
+  background-color: var(--orange-500);
+  border-radius: 10px;
+  max-width: 15rem;
+}
+
+.figura {
+  min-height: calc(100dvh - 68px);
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  padding-bottom: 2rem;
+}
+
+.participants__user {
+  padding: .8rem;
+  background-color: var(--primary-400);
+  border-radius: 6px;
+  margin-bottom: .5rem;
+}
+
+@media screen and (min-width: 768px) {
+  .gift {
+    margin: 1rem 3rem 0 3rem;
+  }
+
+}
+
+@media screen and (min-width: 992px) {
+
+  .box__gift {
+    padding: 0;
+  }
+  .gift {
+    padding: 1rem;
+    margin: 0
+  }
+
+}
+
+@media screen and (min-width: 1300px) {
+
+  .box__gift {
+    padding: 1rem;
+  }
+
+  .gift {
+    padding: 1rem;
+    margin: 1rem 3rem 0 3rem;
+  }
+
+}

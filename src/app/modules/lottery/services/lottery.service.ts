@@ -17,4 +17,11 @@ export class LotteryService {
       switchMap(() => EMPTY)
     );
   }
+
+  getLotteryBtId(id: number): Observable<ILottery> {
+    return this.lotteryApi
+      .getLotteryById(id)
+      .pipe(map((response) => response.data));
+  }
+
 }
