@@ -2,6 +2,6 @@ export interface IResponse<T = any> {
   error:    boolean;
   code:     number;
   message:  string;
-  data?:    T;
+  data:     T;
   token?:   string;
 }
