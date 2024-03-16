@@ -4,6 +4,9 @@
   "newProjectRoot": "projects",
   "projects": {
     "LuckyDiscordApp": {
+      "i18n": {
+        "sourceLocale": "es-EC"
+      },
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {

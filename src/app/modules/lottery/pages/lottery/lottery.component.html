@@ -1,1 +1,94 @@
-<p>lottery works!</p>
+@if (lottery()) {
+<div class="flex justify-content-center">
+  <section class="text-white col-12 md:col-9 lg:col-6">
+    <!-- contenido -->
+    <h1 class="text-5xl">{{ lottery()?.name }}</h1>
+    <p class="text-lg">{{ lottery()?.description }}</p>
+    <div class="flex flex-column my-3">
+      <div>
+        <p class="font-bold">Participar desde el:</p>
+        <p-tag
+          [style]="{
+            background:
+              'linear-gradient(-225deg,#AC32E4 0%,#F44336 48%,#7918F2 100%)'
+          }"
+        >
+          <div class="flex align-items-center gap-2">
+            <span class="text-base">{{
+              lottery()?.startDate | date : "EEEE, MMMM d, y" : "es-EC"
+            }}</span>
+            <span class="text-base"
+              >desde las
+              {{ lottery()?.startDate | date : "h:mm a" : "es-EC" }}</span
+            >
+          </div>
+        </p-tag>
+      </div>
+
+      <div class="my-3">
+        <p class="font-bold">Fecha máxima de participación:</p>
+        <p-tag
+          [style]="{
+            background:
+              'linear-gradient(-225deg,#AC32E4 0%,#F44336 48%,#7918F2 100%)'
+          }"
+        >
+          <div class="flex align-items-center gap-2">
+            <span class="text-base">{{
+              lottery()?.endDate | date : "EEEE, MMMM d, y" : "es-EC"
+            }}</span>
+            <span class="text-base"
+              >antes de las
+              {{ lottery()?.endDate | date : "h:mm a" : "es-EC" }}</span
+            >
+          </div>
+        </p-tag>
+      </div>
+    </div>
+
+    <!-- button -->
+    <div class="block md:flex">
+      <p-button label="Participar" severity="warning" size="large"></p-button>
+    </div>
+
+    <!-- premio solo movil -->
+    <div class="box__gift lg:hidden">
+      <div class="gift shadow-5">
+        <h6 class="font-bold block text-3xl text-white m-0 font-italic">
+          Premio mayor
+        </h6>
+        <p class="text-lg">{{ lottery()?.prize }}</p>
+      </div>
+      <img src="assets/gift devi 1.png" alt="imagen referecia" />
+    </div>
+
+    <p-divider></p-divider>
+
+    <!-- participantes -->
+    <div class="participants">
+      <h5 class="uppercas text-2xl mb-2">participantes</h5>
+      <!-- colocar un scroll si hay demaciados participantes -->
+      <div class="participants__container--scroll">
+        @for (user of lottery()?.users; track user.id ) {
+        <div class="participants__user">{{ user.firstName }} {{ user.lastName }}</div>
+        }@empty {
+        <p>Aun no hay participantes</p>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- DESKTOP -->
+  <section class="figura hidden lg:flex lg:col-3 text-center">
+    <div class="box__gift">
+      <div class="gift">
+        <h6 class="font-bold block text-3xl text-white m-0 font-italic">
+          Premio mayor
+        </h6>
+        <p class="text-lg text-white">{{ lottery()?.prize }}</p>
+      </div>
+      <img src="assets/gift devi 1.png" alt="imagen referecia" />
+    </div>
+  </section>
+</div>
+}

@@ -1,1 +1,110 @@
-<p>add-or-edit-lottery works!</p>
+<form [formGroup]="lotteryForm" class="">
+  <h1 class="mt-2">{{ lotteryId ? "Actualizar Sorteo" : "Nuevo Sorteo" }}</h1>
+  <p-divider></p-divider>
+  <div class="grid">
+    <!-- name -->
+    <div class="col-12 md:col-6 flex flex-column gap-2">
+      <label for="name">Nombre</label>
+      <input
+        pInputText
+        id="name"
+        placeholder="Nombre del sorteo"
+        formControlName="name"
+      />
+      @if (inputValid('name')) {<small class="text-red-700 font-bold"
+        >El name es requerido</small
+      >}
+    </div>
+
+    <!-- prize -->
+    <div class="col-12 md:col-6 flex flex-column gap-2">
+      <label for="prize">Premio</label>
+      <input
+        pInputText
+        id="prize"
+        placeholder="Premio del sorteo"
+        formControlName="prize"
+      />
+      @if (inputValid('prize')) {<small class="text-red-700 font-bold"
+        >El premio es requerido</small
+      >}
+    </div>
+
+    <!-- description -->
+    <div class="col-12 lg:col-6 flex flex-column gap-2">
+      <label for="description">Descripción</label>
+      <textarea
+        rows="5"
+        cols="30"
+        pInputTextarea
+        [autoResize]="true"
+        placeholder="Descripcion del sorteo"
+        formControlName="description"
+      ></textarea>
+
+      @if (inputValid('description')) {<small class="text-red-700 font-bold"
+        >La descripcion es requerido</small
+      >}
+    </div>
+
+    <!-- startDate -->
+    <div class="col-12 md:col-6 lg:col-3 flex flex-column gap-2">
+      <label for="startDate">Fecha de inicio del sorteo</label>
+      <p-calendar
+        [showTime]="true"
+        [showIcon]="true"
+        [iconDisplay]="'input'"
+        [minDate]="currentDate!"
+        [touchUI]="true"
+        [readonlyInput]="true"
+        placeholder="Inicio del sorteo"
+        formControlName="startDate"
+      ></p-calendar>
+      @if (inputValid('startDate')) {<small class="text-red-700 font-bold"
+        >La fecha de inicio es requerida</small
+      >}
+    </div>
+
+    <!-- endDate -->
+    <div class="col-12 md:col-6 lg:col-3 flex flex-column gap-2">
+      <label for="endDate">Fecha de fin del sorteo</label>
+      <p-calendar
+        [showTime]="true"
+        [showIcon]="true"
+        [iconDisplay]="'input'"
+        [minDate]="currentDate!"
+        [touchUI]="true"
+        [readonlyInput]="true"
+        placeholder="Fin del sorteo"
+        formControlName="endDate"
+      ></p-calendar>
+      @if (lotteryForm.hasError('date_invalid') &&
+      this.lotteryForm.controls['endDate'].touched) {
+      <small class="text-red-700 font-bold">
+        La fecha de fin no puede ser inferior a la inicial
+      </small>
+      }
+    </div>
+
+    <!-- active -->
+    @if (lotteryId) {
+    <div class="col-12 text-center mt-3 mb-0">
+      <p-toggleButton
+        onLabel="Activo"
+        offLabel="Inactivo"
+        formControlName="active"
+      ></p-toggleButton>
+    </div>
+    }
+  </div>
+
+  <div class="text-center mt-3">
+    <button
+      pButton
+      pRipple
+      class="bg-primary-700 w-full md:w-4 lg:w-3"
+      [label]="lotteryId ? 'Guardar Cambios' : 'Agregar Sorteo'"
+      (click)="save()"
+    ></button>
+  </div>
+</form>

@@ -1,4 +1,15 @@
 <div class="lotterys__list">
+  <section class="p-2">
+    <button
+      pButton
+      pRipple
+      class="bg-primary-700"
+      [routerLink]="['/admin/dashboard/sorteo/agregar']"
+    >
+      Nuevo sorteo
+    </button>
+    <p-divider></p-divider>
+  </section>
   <section class="p-2 grid">
     @for (lottery of lotterys(); track $index) {
     <article class="col-12 sm:col-6 lg:col-4 xl:col-3">

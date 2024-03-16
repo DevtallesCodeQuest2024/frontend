@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 
 import { MenubarModule } from 'primeng/menubar';
-import { MenuItem } from 'primeng/api';
+import { ConfirmationService, MenuItem } from 'primeng/api';
 import { AuthService } from '@app/core/auth/auth.service';
 import { NgClass, NgOptimizedImage } from '@angular/common';
 
@@ -39,6 +39,7 @@ import { NgClass, NgOptimizedImage } from '@angular/common';
 })
 export class HeaderComponent {
   private authService = inject(AuthService);
+  private confirmationService = inject(ConfirmationService);
 
   @Input({ transform: booleanAttribute }) isAdmin: boolean = false;
 
@@ -91,6 +92,15 @@ export class HeaderComponent {
   });
 
   logout() {
-    this.authService.logout();
+    this.confirmationService.confirm({
+      message: '¿Estas seguro de que quieres cerrar sesión?',
+      header: 'Cerrar Sesión',
+      icon: 'pi pi-exclamation-triangle',
+      acceptIcon: 'none',
+      rejectIcon: 'none',
+      key: 'dialog',
+      rejectButtonStyleClass: 'p-button-text',
+      accept: () => this.authService.logout(),
+    });
   }
 }

@@ -1,11 +1,16 @@
 <div class="flex justify-content-center">
-  <div class="col-12 md:col-10">
-    <section class="p-2 grid">
+  <section class="figura hidden lg:flex lg:col-3 text-center">
+    <img src="assets/gift devi 3.png" alt="imagen referecia" class="p-3" />
+  </section>
+  <section class="col-12 md:col-10 lg:col-9">
+    <div class="p-2 grid justify-content-center">
       @for (lottery of lotterys(); track $index) {
-      <article class="col-12 sm:col-6 lg:col-4 xl:col-3">
+      <article class="col-12 sm:col-6 lg:col-4">
         <app-lottery-card [lottery]="lottery"></app-lottery-card>
       </article>
+      }@empty {
+      <h1>No hay data</h1>
       }
-    </section>
-  </div>
+    </div>
+  </section>
 </div>

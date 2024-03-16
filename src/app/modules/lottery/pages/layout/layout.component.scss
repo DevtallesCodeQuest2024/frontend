@@ -1,6 +1,13 @@
 main {
   background-color: var(--primary-700);
-  min-height: calc(100dvh - 62px);
-  border-radius: 5px;
-  margin: .2rem;
+  min-height: 100dvh;
+  padding-top: 4rem;
+}
+
+app-header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2000;
 }

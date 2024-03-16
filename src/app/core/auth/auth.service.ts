@@ -59,7 +59,8 @@ export class AuthService {
         this.messageService.add({
           key: 'toast',
           severity: 'success',
-          summary: `BIENVENIDO ${data?.firstName} ${data?.lastName}`,
+          summary: 'BIENVENIDO',
+          detail: `${data?.firstName} ${data?.lastName}`,
         });
       }),
       switchMap(() => EMPTY)
