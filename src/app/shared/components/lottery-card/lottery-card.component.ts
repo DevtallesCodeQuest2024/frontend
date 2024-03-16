@@ -16,7 +16,7 @@ import { ConfirmationService, MenuItem } from 'primeng/api';
 
 import { ILottery } from '@app/core/models/loterry';
 import { LotteryService } from '@app/modules/admin/services/lottery.service';
-import { GuestParticiparModalComponent } from '../guest-participar-modal/guest-participar-modal.component';
+import { GuestParticiparModalComponent } from '@app/shared/components/guest-participar-modal/guest-participar-modal.component'
 
 @Component({
   selector: 'app-lottery-card',

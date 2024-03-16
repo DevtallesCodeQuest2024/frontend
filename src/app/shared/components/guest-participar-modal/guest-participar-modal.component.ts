@@ -6,6 +6,8 @@ import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 
+type Size = 'small' | 'large' | undefined;
+
 @Component({
   selector: 'app-guest-participar-modal',
   standalone: true,
@@ -18,6 +20,8 @@ export class GuestParticiparModalComponent {
   @Input() label: string = 'label';
   @Input() icon: string = 'pi pi-user';
   @Input() severity: string = '';
+  @Input() size: Size = undefined;
+  @Input() key: string = 'bc';
   messageService = inject(MessageService);
   discordUser: string = '';
   isUserParticipating: boolean = false;
@@ -42,7 +46,7 @@ export class GuestParticiparModalComponent {
 
     if(this.isUserParticipating) {
       this.messageService.add({
-        key: 'tc',
+        key: this.key,
         severity: 'warn',
         summary: 'Alerta',
         detail: `El usuario ${this.discordUser} ya esta participando`,
@@ -54,7 +58,7 @@ export class GuestParticiparModalComponent {
     if (this.discordUser === '') {
       this.duplicateToast = true;
       this.messageService.add({
-        key: 'tc',
+        key: this.key,
         severity: 'error',
         summary: 'Error',
         detail: 'El campo usuario es requerido',
@@ -64,7 +68,7 @@ export class GuestParticiparModalComponent {
 
     this.duplicateToast = false;
     this.messageService.add({
-      key: 'tc',
+      key: this.key,
       severity: 'success',
       summary: '!Suerte¡',
       detail: `Usuario ${this.discordUser} registrado con éxito`,

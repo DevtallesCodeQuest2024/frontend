@@ -1,7 +1,7 @@
-<p-toast [preventDuplicates]="duplicateToast" position="top-center" key="tc"></p-toast>
+<p-toast [preventDuplicates]="duplicateToast" position="bottom-center" [key]="key"></p-toast>
 
 <div class="card flex justify-content-center">
-    <p-button (click)="showDialog()" [severity]="severity" class="btn--participar" [icon]="icon" [label]="label"></p-button>
+    <p-button (click)="showDialog()" [severity]="severity" class="btn--participar" [icon]="icon" [label]="label" [size]="size"></p-button>
     <p-dialog [(visible)]="visible" [modal]="true" [dismissableMask]="false">
 
         <ng-template pTemplate="headless">

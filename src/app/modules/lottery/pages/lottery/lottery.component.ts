@@ -8,10 +8,12 @@ import { ButtonModule } from "primeng/button";
 import { DividerModule } from "primeng/divider";
 import { TagModule } from 'primeng/tag';
 
+import { GuestParticiparModalComponent } from '@app/shared/components/guest-participar-modal/guest-participar-modal.component'
+
 @Component({
   selector: 'app-lottery',
   standalone: true,
-  imports: [ButtonModule, TagModule, DividerModule, DatePipe],
+  imports: [ButtonModule, TagModule, DividerModule, DatePipe, GuestParticiparModalComponent],
   templateUrl: './lottery.component.html',
   styleUrl: './lottery.component.scss',
 })
