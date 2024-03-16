@@ -37,12 +37,14 @@
         ]"
       ></p-button>
       @if (!isAdmin) {
-      <p-button
+        <app-guest-participar-modal severity="warning" icon="pi pi-ticket" label="Participar" />
+          
+      <!-- <p-button
         label="Participar"
         icon="pi pi-bookmark-fill"
         class="btn--participar"
         severity="warning"
-      ></p-button>
+      ></p-button> -->
       }
     </ng-template>
   </p-card>

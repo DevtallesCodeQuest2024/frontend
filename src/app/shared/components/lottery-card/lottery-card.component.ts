@@ -16,11 +16,12 @@ import { MenuItem } from 'primeng/api';
 
 import { ILottery } from '@app/core/models/loterry';
 import { LotteryService } from '@app/modules/admin/services/lottery.service';
+import { GuestParticiparModalComponent } from '../guest-participar-modal/guest-participar-modal.component';
 
 @Component({
   selector: 'app-lottery-card',
   standalone: true,
-  imports: [CardModule, ButtonModule, BadgeModule, RouterLink, MenuModule],
+  imports: [CardModule, ButtonModule, BadgeModule, RouterLink, MenuModule, GuestParticiparModalComponent],
   templateUrl: './lottery-card.component.html',
   styleUrl: './lottery-card.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
