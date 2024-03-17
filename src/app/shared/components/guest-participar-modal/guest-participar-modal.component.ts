@@ -5,6 +5,7 @@ import { MessageService } from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
+import {AuthService} from "@app/core/auth/auth.service";
 
 type Size = 'small' | 'large' | undefined;
 
@@ -27,6 +28,8 @@ export class GuestParticiparModalComponent {
   isUserParticipating: boolean = false;
   visible: boolean = false;
   duplicateToast: boolean = false;
+
+  private authService = inject(AuthService);
 
   // constructor(private messageService: MessageService) {}
 
@@ -54,7 +57,7 @@ export class GuestParticiparModalComponent {
       this.closeDialog();
       return;
     }
-    
+
     if (this.discordUser === '') {
       this.duplicateToast = true;
       this.messageService.add({
@@ -74,5 +77,16 @@ export class GuestParticiparModalComponent {
       detail: `Usuario ${this.discordUser} registrado con éxito`,
     });
     this.closeDialog();
+  }
+
+  joinwithDiscord() {
+    this.authService.joinWithDiscord().subscribe({
+      next: (response) => {
+        window.location.href = response;
+      },
+      error: (error) => {
+        return error;
+      },
+    });
   }
 }
