@@ -10,6 +10,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { DividerModule } from 'primeng/divider';
+import { MessagesModule } from 'primeng/messages';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -21,6 +22,7 @@ import { RouterLink } from '@angular/router';
     RippleModule,
     RouterLink,
     DividerModule,
+    MessagesModule,
   ],
   templateUrl: './lotterys.component.html',
   styleUrl: './lotterys.component.scss',
@@ -30,6 +32,10 @@ export default class LotterysComponent {
   lotteryService = inject(LotteryService);
 
   lotterys = computed(() => this.lotteryService.lotterys());
+
+  messageNotData = [
+    { severity: 'info', summary: 'Aún no se han creado sorteos', detail: '' },
+  ];
 
   constructor() {
     this.lotteryService.getAllLotterys().pipe(takeUntilDestroyed()).subscribe();

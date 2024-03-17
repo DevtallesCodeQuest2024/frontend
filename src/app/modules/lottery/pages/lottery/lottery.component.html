@@ -51,9 +51,9 @@
       <app-guest-participar-modal
         severity="warning"
         icon="pi pi-ticket"
-        label="Participar" 
+        label="Participar"
         size="large"
-        />
+      />
     </div>
 
     <!-- premio solo movil -->
@@ -70,17 +70,7 @@
     <p-divider></p-divider>
 
     <!-- participantes -->
-    <div class="participants">
-      <h5 class="uppercas text-2xl mb-2">participantes</h5>
-      <!-- colocar un scroll si hay demaciados participantes -->
-      <div class="participants__container--scroll">
-        @for (user of lottery()?.users; track user.id ) {
-        <div class="participants__user">{{ user.firstName }} {{ user.lastName }}</div>
-        }@empty {
-        <p>Aun no hay participantes</p>
-        }
-      </div>
-    </div>
+    <app-list-participants [participants]="lottery()?.users!" />
   </section>
 
   <!-- DESKTOP -->

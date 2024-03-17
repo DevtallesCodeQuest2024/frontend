@@ -12,16 +12,23 @@ import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { BadgeModule } from 'primeng/badge';
 import { MenuModule } from 'primeng/menu';
-import { ConfirmationService, MenuItem } from 'primeng/api';
+import { MenuItem } from 'primeng/api';
 
 import { ILottery } from '@app/core/models/loterry';
 import { LotteryService } from '@app/modules/admin/services/lottery.service';
-import { GuestParticiparModalComponent } from '@app/shared/components/guest-participar-modal/guest-participar-modal.component'
+import { GuestParticiparModalComponent } from '@app/shared/components/guest-participar-modal/guest-participar-modal.component';
 
 @Component({
   selector: 'app-lottery-card',
   standalone: true,
-  imports: [CardModule, ButtonModule, BadgeModule, RouterLink, MenuModule, GuestParticiparModalComponent],
+  imports: [
+    CardModule,
+    ButtonModule,
+    BadgeModule,
+    RouterLink,
+    MenuModule,
+    GuestParticiparModalComponent,
+  ],
   templateUrl: './lottery-card.component.html',
   styleUrl: './lottery-card.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -29,7 +36,6 @@ import { GuestParticiparModalComponent } from '@app/shared/components/guest-part
 export class LotteryCardComponent {
   // Service
   private lotteryAdminService = inject(LotteryService, { optional: true });
-  private confirmationService = inject(ConfirmationService);
   private router = inject(Router);
 
   // Inputs
@@ -43,38 +49,26 @@ export class LotteryCardComponent {
       items: [
         {
           label: 'Actualizar',
-          icon: 'pi pi-refresh',
+          icon: 'pi pi-pencil',
           command: () => {
             this.goRuteUpdate();
           },
         },
         {
           label: 'Eliminar',
-          icon: 'pi pi-times',
-          command: () => {
-            this.delete();
-          },
+          icon: 'pi pi-trash',
+          command: () =>
+            this.lotteryAdminService!.confirmDeleteLottery(this.lottery.id!),
         },
       ],
     },
   ]);
 
   goRuteUpdate() {
-    this.router.navigate(['admin/dashboard/sorteo', this.lottery.id, 'editar']);
-  }
-
-  delete() {
-    this.confirmationService.confirm({
-      message: '¿Estas seguro de que quieres eliminar este sorteo?',
-      header: 'Eliminar Sorteo',
-      icon: 'pi pi-exclamation-triangle',
-      acceptIcon: 'pi pi-trash',
-      rejectIcon: 'none',
-      rejectButtonStyleClass: 'p-button-text',
-      key: 'dialog',
-      accept: () => {
-        this.lotteryAdminService!.deleteLottery(this.lottery.id!).subscribe();
-      },
-    });
+    this.router.navigate([
+      '/admin/dashboard/sorteo',
+      this.lottery.id,
+      'editar',
+    ]);
   }
 }

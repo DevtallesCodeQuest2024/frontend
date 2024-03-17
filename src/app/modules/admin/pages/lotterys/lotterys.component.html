@@ -15,6 +15,10 @@
     <article class="col-12 sm:col-6 lg:col-4 xl:col-3">
       <app-lottery-card [lottery]="lottery" isAdmin></app-lottery-card>
     </article>
+    }@empty {
+      <div class="col-12 flex justify-content-center align-items-center">
+        <p-messages [(value)]="messageNotData" [enableService]="false" [closable]="false"></p-messages>
+      </div>
     }
   </section>
 </div>

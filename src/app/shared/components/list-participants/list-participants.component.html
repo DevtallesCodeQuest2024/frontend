@@ -1,0 +1,23 @@
+<div class="participants my-4">
+  <h5 class="uppercas text-2xl mb-2">Participantes</h5>
+  <p-divider></p-divider>
+  <div class="participants__container--scroll">
+    @for (user of participants; track $index ) {
+    <p-chip styleClass="pl-0 m-2">
+      <span
+        class="bg-indigo-700 text-white border-circle w-2rem h-2rem flex align-items-center justify-content-center"
+        >D</span
+      >
+      <span class="ml-2 font-medium">{{ user.firstName }}</span>
+    </p-chip>
+
+    }@empty {
+
+    <p-messages
+      [(value)]="messageNotData"
+      [enableService]="false"
+      [closable]="false"
+    ></p-messages>
+    }
+  </div>
+</div>

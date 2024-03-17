@@ -2,12 +2,13 @@ import { Injectable, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { LotteryApiService } from '@app/core/api/lottery-api.service';
 import { ILottery } from '@app/core/models/loterry';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { EMPTY, Observable, map, switchMap, tap } from 'rxjs';
 
 @Injectable()
 export class LotteryService {
   // services
+  private confirmationService = inject(ConfirmationService);
   private messageService = inject(MessageService);
   private lotteryApi = inject(LotteryApiService);
   private router = inject(Router);
@@ -43,7 +44,20 @@ export class LotteryService {
     );
   }
 
-  deleteLottery(lotteryId: number): Observable<void> {
+  confirmDeleteLottery(id: number) {
+    this.confirmationService.confirm({
+      message: '¿Estas seguro de que quieres eliminar este sorteo?',
+      header: 'Eliminar Sorteo',
+      icon: 'pi pi-exclamation-triangle',
+      acceptIcon: 'pi pi-trash',
+      rejectIcon: 'none',
+      rejectButtonStyleClass: 'p-button-text',
+      key: 'dialog',
+      accept: () => this.deleteLottery(id).subscribe(),
+    });
+  }
+
+  private deleteLottery(lotteryId: number): Observable<void> {
     return this.lotteryApi.deleteLottery(lotteryId).pipe(
       tap((response) => {
         this.lotterys.update((lotterys) =>
@@ -51,6 +65,7 @@ export class LotteryService {
         );
         this.showMessage(response.message);
       }),
+      tap((_) => this.router.navigate(['/admin/dashboard/sorteos'])),
       switchMap(() => EMPTY)
     );
   }
