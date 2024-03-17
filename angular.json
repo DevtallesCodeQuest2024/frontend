@@ -4,6 +4,9 @@
   "newProjectRoot": "projects",
   "projects": {
     "LuckyDiscordApp": {
+      "i18n": {
+        "sourceLocale": "es-EC"
+      },
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -15,7 +18,7 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:browser-esbuild",
           "options": {
             "outputPath": "dist/frontend",
             "index": "src/index.html",

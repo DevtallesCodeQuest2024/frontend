@@ -1,5 +1,5 @@
 import { Injectable, inject, signal } from '@angular/core';
-import { EMPTY, Observable, catchError, map, of, switchMap, tap } from 'rxjs';
+import {EMPTY, Observable, catchError, map, of, switchMap, tap, throwError} from 'rxjs';
 import { Router } from '@angular/router';
 
 // services
@@ -10,6 +10,7 @@ import { AuthApiService } from '@app/core/api/auth-api.service';
 import { ILogin } from '@app/core/models/auth';
 import { IUser } from '@app/core/models/user';
 import { IResponse } from "../models/apiResponse";
+import {getFirstMessageOfError} from "@app/shared/utils/message-values";
 
 @Injectable({
   providedIn: 'root',
@@ -59,7 +60,8 @@ export class AuthService {
         this.messageService.add({
           key: 'toast',
           severity: 'success',
-          summary: `BIENVENIDO ${data?.firstName} ${data?.lastName}`,
+          summary: 'BIENVENIDO',
+          detail: `${data?.firstName} ${data?.lastName}`,
         });
       }),
       switchMap(() => EMPTY)
@@ -71,4 +73,16 @@ export class AuthService {
     localStorage.removeItem('token');
     this.router.navigateByUrl('/admin/login');
   }
+
+  joinWithDiscord(): Observable<any> {
+    return this.authApi.joinWithDiscord().pipe(
+      tap((response) => {
+        return response;
+      }),
+      catchError(({ error }) => {
+        return throwError( () => 'Error al iniciar sesión con Discord');
+      })
+    )
+  }
+
 }

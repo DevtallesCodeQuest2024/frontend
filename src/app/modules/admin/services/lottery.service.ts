@@ -1,67 +1,66 @@
 import { Injectable, inject, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { LotteryApiService } from '@app/core/api/lottery-api.service';
 import { ILottery } from '@app/core/models/loterry';
-import { lotterysMockData } from '@app/core/utils/mockData';
-import { MessageService } from "primeng/api";
-import { EMPTY, Observable, delay, of, switchMap, take, tap } from 'rxjs';
+import { MessageService } from 'primeng/api';
+import { EMPTY, Observable, map, switchMap, tap } from 'rxjs';
 
 @Injectable()
 export class LotteryService {
   // services
   private messageService = inject(MessageService);
   private lotteryApi = inject(LotteryApiService);
+  private router = inject(Router);
 
-  // variables
+  // lotterys state
   public lotterys = signal<ILottery[]>([]);
-  public delayCount = signal<number>(1000);
 
-  getAllLotterys(): Observable<ILottery[]> {
-    // return this.lotteryApi.getAllLotterys();
-
-    return of(lotterysMockData).pipe(take(1), delay(this.delayCount()));
+  getAllLotterys(): Observable<void> {
+    return this.lotteryApi.getAllLotterys().pipe(
+      tap((response) => this.lotterys.set(response.data)),
+      switchMap(() => EMPTY)
+    );
   }
 
-  createLottery(lottery: ILottery): Observable<ILottery> {
-    // return this.lotteryApi.createLottery(lottery);
-
-    this.lotterys.update((lotterys) => [...lotterys, lottery]);
-
-    return of(lottery).pipe(delay(this.delayCount()));
+  getLotteryBtId(id: number): Observable<ILottery> {
+    return this.lotteryApi
+      .getLotteryById(id)
+      .pipe(map((response) => response.data));
   }
 
-  updateLottery(lottery: ILottery): Observable<ILottery> {
-    // return this.lotteryApi.updateLottery(lottery);
-
-    this.lotterys.update((lotterys) => {
-      return lotterys.map((lotteryItem) => {
-        if (lotteryItem.id === lottery.id) {
-          lotteryItem = lottery;
-        }
-        return lottery;
-      });
-    });
-
-    return of(lottery).pipe(delay(this.delayCount()));
+  createLottery(lottery: ILottery): Observable<void> {
+    return this.lotteryApi.createLottery(lottery).pipe(
+      tap((response) => this.showMessage(response.message)),
+      tap((_) => this.router.navigate(['/admin/dashboard/sorteos'])),
+      switchMap(() => EMPTY)
+    );
   }
 
-  deleteLottery(lottery: ILottery): Observable<void> {
-    // return this.lotteryApi.deleteLottery(id)
-    const { id } = lottery;
-    this.lotterys.update((lotterys) => {
-      return lotterys.filter((lottery) => lottery.id !== id);
-    });
+  updateLottery(lottery: ILottery): Observable<void> {
+    return this.lotteryApi.updateLottery(lottery).pipe(
+      tap((response) => this.showMessage(response.message)),
+      switchMap(() => EMPTY)
+    );
+  }
 
-    return of(lottery).pipe(
-      delay(this.delayCount()),
-      tap((lottery) => {
-        this.messageService.add({
-          key: 'toast',
-          severity: 'success',
-          summary: 'Listo!',
-          detail: `${lottery.name} eliminada exitosamente`,
-        });
+  deleteLottery(lotteryId: number): Observable<void> {
+    return this.lotteryApi.deleteLottery(lotteryId).pipe(
+      tap((response) => {
+        this.lotterys.update((lotterys) =>
+          lotterys.filter((lottery) => lottery.id !== lotteryId)
+        );
+        this.showMessage(response.message);
       }),
       switchMap(() => EMPTY)
     );
+  }
+
+  private showMessage(message: string): void {
+    this.messageService.add({
+      key: 'toast',
+      severity: 'success',
+      summary: 'Listo!',
+      detail: message,
+    });
   }
 }

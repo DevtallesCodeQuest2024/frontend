@@ -9,7 +9,7 @@
     <div class="flex justify-content-between align-items-center">
       <div class="flex align-items-center">
         <p-badge
-          value="{{ lottery.participants }}"
+          value="{{ lottery.users?.length }}"
           severity="warning"
         ></p-badge>
         <span class="ml-1">Participantes</span>
@@ -22,7 +22,7 @@
           type="button"
           (click)="menu.toggle($event)"
           icon="pi pi-bars"
-          class="bg-primary-900 border-circle"
+          class="bg-primary-700 border-circle"
         ></button>
       </div>
       }
@@ -37,12 +37,14 @@
         ]"
       ></p-button>
       @if (!isAdmin) {
-      <p-button
+        <app-guest-participar-modal severity="warning" icon="pi pi-ticket" label="Participar" />
+          
+      <!-- <p-button
         label="Participar"
         icon="pi pi-bookmark-fill"
         class="btn--participar"
         severity="warning"
-      ></p-button>
+      ></p-button> -->
       }
     </ng-template>
   </p-card>
