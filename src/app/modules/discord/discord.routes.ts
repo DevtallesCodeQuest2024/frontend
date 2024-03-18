@@ -2,11 +2,12 @@ import { Route } from '@angular/router';
 
 export default [
   {
-    path: 'registro',
-    loadComponent: () => import('./register/register.component'),
+    path: '',
+    loadComponent: () => import('./not-community/not-community.component'),
+    pathMatch: 'full',
   },
   {
-    path: 'error',
-    loadComponent: () => import('./not-community/not-community.component'),
+    path: 'registro',
+    loadComponent: () => import('./register/register.component'),
   },
 ] satisfies Route[];
