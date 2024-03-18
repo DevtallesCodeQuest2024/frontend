@@ -28,17 +28,26 @@
       }
     </div>
     <ng-template pTemplate="footer" class="w-full" style="padding-top: 0">
-      <p-button
-        label="Detalle"
-        [outlined]="true"
-        [routerLink]="[
-          isAdmin ? '/admin/dashboard/sorteo' : './detalle',
-          lottery.id
-        ]"
-      ></p-button>
+      <div class="flex flex-column gap-2">
+        <p-button
+          label="Detalle"
+          [outlined]="true"
+          [routerLink]="[
+            isAdmin ? '/admin/dashboard/sorteo' : './detalle',
+            lottery.id
+          ]"
+        ></p-button>
+
+        @if (isAdmin) {
+          <p-button
+            label="Elegir ganador"
+            (click)="onChooseWinner()"
+          ></p-button>
+        }
+      </div>
       @if (!isAdmin) {
         <app-guest-participar-modal severity="warning" icon="pi pi-ticket" label="Participar" />
-          
+
       <!-- <p-button
         label="Participar"
         icon="pi pi-bookmark-fill"
