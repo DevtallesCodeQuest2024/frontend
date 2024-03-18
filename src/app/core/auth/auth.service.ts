@@ -77,7 +77,7 @@ export class AuthService {
   joinWithDiscord(): Observable<any> {
     return this.authApi.joinWithDiscord().pipe(
       tap((response) => {
-        return response;
+       console.log(response);
       }),
       catchError(({ error }) => {
         return throwError( () => 'Error al iniciar sesión con Discord');
