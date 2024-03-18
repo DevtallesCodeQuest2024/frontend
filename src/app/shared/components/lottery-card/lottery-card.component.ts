@@ -12,7 +12,7 @@ import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { BadgeModule } from 'primeng/badge';
 import { MenuModule } from 'primeng/menu';
-import { MenuItem } from 'primeng/api';
+import {MenuItem, MessageService} from 'primeng/api';
 
 import { ILottery } from '@app/core/models/loterry';
 import { LotteryService } from '@app/modules/admin/services/lottery.service';
@@ -37,6 +37,7 @@ export class LotteryCardComponent {
   // Service
   private lotteryAdminService = inject(LotteryService, { optional: true });
   private router = inject(Router);
+  private messageService = inject(MessageService);
 
   // Inputs
   @Input({ required: true }) lottery!: ILottery;
@@ -70,5 +71,14 @@ export class LotteryCardComponent {
       this.lottery.id,
       'editar',
     ]);
+  }
+
+  onChooseWinner() {
+    this.messageService.add({
+      key: 'toast',
+      severity: 'success',
+      summary: 'Realizando sorteo!',
+      detail: "La persona ganadora es...",
+    });
   }
 }
