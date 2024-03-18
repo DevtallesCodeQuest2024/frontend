@@ -5,3 +5,11 @@
   width: 100%;
   color: var(--primary-900);
 }
+
+::ng-deep .p-button.bg-green-500 {
+  cursor: unset;
+}
+
+::ng-deep .p-button.bg-green-500:focus {
+  box-shadow: none !important;
+}

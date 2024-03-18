@@ -3,7 +3,9 @@ import { LotteryApiService } from '@app/core/api/lottery-api.service';
 import { ILottery } from '@app/core/models/loterry';
 import { EMPTY, Observable, delay, map, of, switchMap, tap } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class LotteryService {
   // services
   private lotteryApi = inject(LotteryApiService);
@@ -23,5 +25,4 @@ export class LotteryService {
       .getLotteryById(id)
       .pipe(map((response) => response.data));
   }
-
 }

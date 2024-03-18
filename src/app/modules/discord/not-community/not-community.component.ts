@@ -37,7 +37,7 @@ export default class NotCommunityComponent {
       this.messageService.add({
         key: 'toast',
         severity: 'info',
-        summary: 'Upps!',
+        summary: `${payload.discordUsername}!`,
         detail: 'Parece que no eres parte del la comunidad de devtalles',
         sticky: true,
       });

@@ -13,7 +13,6 @@ export const routes: Routes = [
     path: 'sorteos',
     loadComponent: () => import('./modules/lottery/pages/layout/layout.component'),
     loadChildren: () => import('./modules/lottery/lottery.routes'),
-    providers: [LotteryService],
     canActivate: [authDiscordGuard],
   },
   {

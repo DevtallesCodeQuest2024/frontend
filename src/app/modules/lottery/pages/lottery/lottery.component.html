@@ -47,13 +47,16 @@
     </div>
 
     <!-- button -->
-    <div class="block md:flex">
-      <app-guest-participar-modal
-        severity="warning"
-        icon="pi pi-ticket"
-        label="Participar"
-        size="large"
-      />
+    <div class="md:flex justify-content-start">
+      <div class="col-12 md:col-6">
+        <app-guest-participar-modal
+          severity="warning"
+          icon="pi pi-ticket"
+          label="Participar"
+          size="large"
+          [lottery]="lottery()!"
+        />
+      </div>
     </div>
 
     <!-- premio solo movil -->

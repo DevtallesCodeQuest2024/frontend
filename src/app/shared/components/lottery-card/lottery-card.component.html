@@ -39,14 +39,16 @@
         ></p-button>
 
         @if (isAdmin) {
-          <p-button
-            label="Elegir ganador"
-            (click)="onChooseWinner()"
-          ></p-button>
+        <p-button label="Elegir ganador" (click)="onChooseWinner()"></p-button>
         }
       </div>
       @if (!isAdmin) {
-        <app-guest-participar-modal severity="warning" icon="pi pi-ticket" label="Participar" />
+      <app-guest-participar-modal
+        severity="warning"
+        icon="pi pi-ticket"
+        label="Participar"
+        [lottery]="lottery"
+      />
 
       <!-- <p-button
         label="Participar"
