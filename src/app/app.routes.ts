@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { authGuard } from './core/guards/auth.guard';
+import { authAdminGuard, authDiscordGuard } from './core/guards/auth.guard';
 import { notAuthGuard } from './core/guards/not-auth.guard';
 import { LotteryService } from '@app/modules/lottery/services/lottery.service';
 import { RegistryService } from "@app/modules/registry/services/registry.service";
@@ -14,6 +14,11 @@ export const routes: Routes = [
     loadComponent: () => import('./modules/lottery/pages/layout/layout.component'),
     loadChildren: () => import('./modules/lottery/lottery.routes'),
     providers: [LotteryService],
+    canActivate: [authDiscordGuard],
+  },
+  {
+    path: 'discord',
+    loadChildren: () => import('./modules/discord/discord.routes'),
   },
   {
     path: 'admin',
@@ -33,7 +38,7 @@ export const routes: Routes = [
         path: 'dashboard',
         loadComponent: () => import('./modules/admin/pages/dashboard/dashboard.component'),
         loadChildren: () => import('./modules/admin/admin.routes'),
-        canActivate: [authGuard],
+        canActivate: [authAdminGuard],
       },
       {
         path: '',

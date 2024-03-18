@@ -5,14 +5,14 @@ import { MessageService } from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
-import {AuthService} from "@app/core/auth/auth.service";
+import { AuthService } from '@app/core/auth/auth.service';
 
 type Size = 'small' | 'large' | undefined;
 
 @Component({
   selector: 'app-guest-participar-modal',
   standalone: true,
-  imports: [ FormsModule, ButtonModule, DialogModule, ToastModule],
+  imports: [FormsModule, ButtonModule, DialogModule, ToastModule],
   providers: [MessageService],
   templateUrl: './guest-participar-modal.component.html',
   styleUrl: './guest-participar-modal.component.scss',
@@ -46,8 +46,7 @@ export class GuestParticiparModalComponent {
   }
 
   register() {
-
-    if(this.isUserParticipating) {
+    if (this.isUserParticipating) {
       this.messageService.add({
         key: this.key,
         severity: 'warn',
@@ -80,13 +79,6 @@ export class GuestParticiparModalComponent {
   }
 
   joinwithDiscord() {
-    this.authService.joinWithDiscord().subscribe({
-      next: (response) => {
-        window.location.href = response;
-      },
-      error: (error) => {
-        return error;
-      },
-    });
+    this.authService.joinWithDiscord().subscribe();
   }
 }

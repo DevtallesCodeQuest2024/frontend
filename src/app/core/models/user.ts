@@ -1,8 +1,9 @@
 export interface IUser {
-  id:           number;
-  firstName:    string;
-  lastName:     string;
-  email:        string;
-  role:         string;
-  isActive:     boolean;
+  id:                 number;
+  firstName:          string;
+  lastName:           string;
+  discordUsername:    string
+  email:              string;
+  role:               string;
+  isActive:           boolean;
 }

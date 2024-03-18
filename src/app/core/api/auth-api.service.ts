@@ -23,7 +23,7 @@ export class AuthApiService {
     return this.http.get<IResponse<IUser>>(`${this.url}/users/renew`);
   }
 
-  joinWithDiscord(): Observable<any> {
+  joinWithDiscord(): Observable<string> {
     const discordAuthUrl = `https://discord.com/oauth2/authorize?client_id=${
       this.DISCORD_CLIENT_ID
     }&response_type=code&redirect_uri=${encodeURIComponent(

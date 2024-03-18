@@ -1,5 +1,14 @@
 import { Injectable, inject, signal } from '@angular/core';
-import {EMPTY, Observable, catchError, map, of, switchMap, tap, throwError} from 'rxjs';
+import {
+  EMPTY,
+  Observable,
+  catchError,
+  map,
+  of,
+  switchMap,
+  tap,
+  throwError,
+} from 'rxjs';
 import { Router } from '@angular/router';
 
 // services
@@ -9,8 +18,6 @@ import { AuthApiService } from '@app/core/api/auth-api.service';
 // interfaces
 import { ILogin } from '@app/core/models/auth';
 import { IUser } from '@app/core/models/user';
-import { IResponse } from "../models/apiResponse";
-import {getFirstMessageOfError} from "@app/shared/utils/message-values";
 
 @Injectable({
   providedIn: 'root',
@@ -24,27 +31,28 @@ export class AuthService {
   // User Authenticated
   public authUser = signal<IUser | undefined>(undefined);
 
-  isAuthenticated(): Observable<boolean> {
+  isAuthenticated(roleName: string): Observable<boolean> {
     const token: string = localStorage.getItem('token') || '';
-
     if (!token) return of(false);
-
     if (this.authUser()) return of(true);
 
     return this.loginRenew().pipe(
-      map(() => true),
-      catchError((err) => {
+      switchMap((user) =>
+        user.role === roleName ? of(true) : throwError(() => false)
+      ),
+      catchError((error) => {
         this.logout();
         return of(false);
       })
     );
   }
 
-  private loginRenew(): Observable<IResponse<IUser>> {
+  private loginRenew(): Observable<IUser> {
     return this.authApi.renew().pipe(
-      tap(({data, token}) => {
+      map(({ data, token }) => {
         this.authUser.set(data);
         localStorage.setItem('token', token!);
+        return data;
       })
     );
   }
@@ -71,18 +79,18 @@ export class AuthService {
   logout() {
     this.authUser.set(undefined);
     localStorage.removeItem('token');
-    this.router.navigateByUrl('/admin/login');
+
+    if (this.authUser()?.role === 'admin') {
+      this.router.navigateByUrl('/admin/login');
+    } else {
+      this.router.navigateByUrl('/');
+    }
   }
 
-  joinWithDiscord(): Observable<any> {
+  joinWithDiscord(): Observable<void> {
     return this.authApi.joinWithDiscord().pipe(
-      tap((response) => {
-       console.log(response);
-      }),
-      catchError(({ error }) => {
-        return throwError( () => 'Error al iniciar sesión con Discord');
-      })
-    )
+      tap((discordUrl) => (window.location.href = discordUrl)),
+      switchMap(() => EMPTY)
+    );
   }
-
 }
